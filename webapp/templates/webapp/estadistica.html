@@ -1,0 +1,112 @@
+{% extends "webapp/base.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="container" id="contexto">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        
+        <h1 class="text-center" style="color:white">BASE DE DATOS DE PACIENTES DIAGNOSTICADOS CON COVID-19</h1>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <p style="color:white">En esta sección mostraremos la Base de Datos de pacientes diagnosticados con COVID-19, que han presentado un 
+            cuadro clínico grave asociado a alguna comorbilidad.
+            Ésta base permitió el entrenamiento de los algoritmos Naive Bayes y Árboles de Decisión para que realicen un pronóstico con un alto procentaje de precisión en cuanto a si un paciente con COVID-19
+            tiene un bajo o alto riesgo de fallecer.</p>
+    </div>
+    <div class="py-4 col-sm-12 col-md-12 col-lg-12">        
+        <fieldset>                        
+            {% if not factorRiesgo %}
+            <div class="alert alert-danger" role="alert">No hay datos.</div>
+            {% endif %}
+            <div class="table-responsive">
+                <table id="data" class="table table-dark table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th id="cabecera">IDE</th>  
+                            <th id="cabecera"><img src="{% static 'webapp/img/SEXO.jpg' %}"> SEXO</img></th>
+                            <th id="cabecera"><img src="{% static 'webapp/img/EDAD.jpg' %}"> EDAD</img></th>
+                            <th id="cabecera"><img src="{% static 'webapp/img/NEUMONIA.jpg' %}"> NEUMONIA</img></th>
+                            <th id="cabecera"><img src="{% static 'webapp/img/DIABETES.jpg' %}"> DIABETES</img></th>
+                            <th id="cabecera"><img src="{% static 'webapp/img/EPOC.jpg' %}"> EPOC</img></th>
+                            <th id="cabecera"><img src="{% static 'webapp/img/ASMA.jpg' %}"> ASMA</img></th>
+                            <th id="cabecera"><img src="{% static 'webapp/img/INMUSUPR.jpg' %}"> INMUSUPR</img></th>
+                            <th id="cabecera"><img src="{% static 'webapp/img/HIPERTENSION.jpg' %}"> HIPERTENSION</img></th>
+                            <th id="cabecera"><img src="{% static 'webapp/img/CARDIOVASCULAR.jpg' %}"> CARDIOVASCULAR</img></th>
+                            <th id="cabecera"><img src="{% static 'webapp/img/OBESIDAD.jpg' %}"> OBESIDAD</img></th>
+                            <th id="cabecera"><img src="{% static 'webapp/img/RENAL_CRONICA.jpg' %}"> RENAL_CRONICA</img></th>
+                            <th id="cabecera"><img src="{% static 'webapp/img/TABAQUISMO.jpg' %}"> TABAQUISMO</img></th>
+                            <th id="cabecera"><img src="{% static 'webapp/img/COVID.jpg' %}"> COVID</img></th>
+                            <th id="cabecera"><img src="{% static 'webapp/img/OTRA_COM.jpg' %}"> OTRA_COM</img></th>
+                            <th id="cabecera"><img src="{% static 'webapp/img/DECESO.jpg' %}"> DECESO</img></th>
+                            <!--<th id="cabecera"> Horas</th>-->
+                        </tr>
+                    </thead>
+                    <tbody id="lista">
+                        {% if factorRiesgo %}
+						{% for factorRiesgos in factorRiesgo %}
+                        <tr>
+                            <th>{{factorRiesgos.ID}}</th>
+                            <th>{{factorRiesgos.SEXO}}</th>
+                            <th>{{factorRiesgos.EDAD}}</th>
+                            <th>{{factorRiesgos.NEUMONIA}}</th>
+                            <th>{{factorRiesgos.DIABETES}}</th>
+                            <th>{{factorRiesgos.EPOC}}</th>
+                            <th>{{factorRiesgos.ASMA}}</th>
+                            <th>{{factorRiesgos.INMUSUPR}}</th>
+                            <th>{{factorRiesgos.HIPERTENSION}}</th>
+                            <th>{{factorRiesgos.CARDIOVASCULAR}}</th>
+                            <th>{{factorRiesgos.OBESIDAD}}</th>
+                            <th>{{factorRiesgos.RENAL_CRONICA}}</th>
+                            <th>{{factorRiesgos.TABAQUISMO}}</th>
+                            <th>{{factorRiesgos.COVID}}</th>
+                            <th>{{factorRiesgos.OTRA_COM}}</th>
+                            <th>{{factorRiesgos.DECESO}}</th>
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </fieldset>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <nav aria-label="Page navigation example">		
+            <ul class="pagination justify-content-center pagination-lg">			
+                {% if factorRiesgo.has_previous %}
+                    <li class="page-item">					
+                        <a class="page-link bg-dark" href="/estadistica?page=1">&laquo; First</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link bg-dark" href="/estadistica?page={{ factorRiesgo.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true"><i class="fa fa-step-backward"></i></span>
+                        </a>
+                    </li>
+                {% endif %}
+                {% if page_range %}
+                    {% for page in page_range %}
+                        <li class="page-item"><a class="page-link bg-dark" href="/estadistica?page={{page}}">{{page}}</a></li>
+                    {% endfor %}
+                {% endif %}                
+
+                {% if factorRiesgo.has_next %}
+                <li class="page-item">
+                    <a class="page-link bg-dark" href="/estadistica?page={{ factorRiesgo.next_page_number }}" aria-label="Next">
+                        <span aria-hidden="true"><i class="fa fa-step-forward"></i></span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link bg-dark"
+                        href="/estadistica?page={{ factorRiesgo.paginator.num_pages }}">Last &raquo;</a>
+                    </li>
+                {% endif %}            
+                
+            </ul>
+            <p class="text-center">
+                Página {{ factorRiesgo.number }} de {{ factorRiesgo.paginator.num_pages }}.
+            </p>
+        </nav>    
+    </div>
+    
+</div>
+{% endblock %}

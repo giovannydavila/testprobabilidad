@@ -1,0 +1,100 @@
+{% extends "webapp/base.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-sm-6">
+				<form method="POST" action="" id="naiveBayes" >
+					{% csrf_token %}
+          <table>
+					  {{form.as_table}}							
+          </table>          
+					<div class="modal-footer">					
+            <input type="button" name="botoncito[]" onclick="predecir(1)" class="btn btn-secondary" value="Naive Bayes" data-toggle="modal" data-target="#staticBackdrop" disabled>
+            <input type="button" name="botoncito[]" onclick="predecir(2)" class="btn btn-secondary" value="Árbol de Decisión" data-toggle="modal" data-target="#staticBackdrop" disabled>
+					</div>     							
+						<label id="predecir"> 
+						<!--valor predecido-->
+						
+						</label>
+				</form>
+		</div>
+	</div>	
+</div>		
+<!-- Modal -->
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-dark spin" id="staticBackdropLabel"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid opa">
+          <div class="row">
+            <div class="col-md-12"><p class="spin text-dark score1" ></p></div>
+          </div>
+          <div class="row">
+            <div class="col-md-12"><p class="spin text-dark score1" ></p></div>
+          </div>
+          <div id="" class="matrix"></div>
+          <div id="myCarousel">
+            <div id="carouselExampleDark" class="carousel carousel-dark slide" data-ride="carousel">
+              <ol class="carousel-indicators">
+                <li data-target="#carouselExampleDark" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleDark" data-slide-to="1"></li>
+                <li data-target="#carouselExampleDark" data-slide-to="2"></li>
+              </ol>
+              <div class="carousel-inner">
+                <div class="carousel-item active" data-interval="10000">
+                  <img src=".." class="d-block w-100 analisis" alt="grafico.png">
+                  <div class="p-2 carousel-caption d-none d-md-block hack bg-light">
+                    <h5 class="text-dark">Confusion</h5>
+                    <p class="result"><h6>Los valores reales negativos y positivos se representan como columnas, mientras que los valores pronosticados se muestran como las filas.
+                        Los valores que se encuentran en el punto 0,0 son Verdaderos negativos
+                        Los valores que se encuentran en el punto 0,1 son Falsos positivos.
+                        Los valores que se encuentran en el punto 1,0 son falsos negativos.
+                        Los valores que se encuentran en el punto 1,1 son verdaderos positivos.</h6></p>
+                  </div>
+                </div>
+                <div class="carousel-item" data-interval="5000">
+                  <img src=".." class="d-block w-100 analisis" alt="curvaRoc.png" id="curva">
+                  <div class="p-2 carousel-caption d-none d-md-block hack bg-light">
+                    <h5 class="text-dark">ROC</h5>
+                    <p class="result">El área entre la línea naranja (ROC) y el eje se llama AUC. Cuanto mayor sea el área cubierta mejor será el modelo entrenado.</p>
+                  </div>
+                </div>
+                  <div id="arbol" class="carousel-item invisible">
+                  <img src=".." class="d-block w-100 analisis" alt="arbol.png">
+                  <div class="p-2 carousel-caption d-none d-md-block hack bg-light">
+                    <h5 class="text-dark">ÁRBOLES</h5>
+                    <p class="result">El gráfico representa a un paciente diagnosticado con COVID-19, su cuadro clínico grave asociado a alguna Comorbilidad y la posibilidad de fallecer o no</p>
+                  </div>
+                </div> 
+              </div>
+              <a class="carousel-control-prev result" href="#carouselExampleDark" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </a>
+              <a class="carousel-control-next result" href="#carouselExampleDark" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </a>
+            </div>
+          </div>            
+        </div>
+      </div>      
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>                
+      </div>                 
+    </div>
+  </div>
+</div>
+{% endblock content %}
+

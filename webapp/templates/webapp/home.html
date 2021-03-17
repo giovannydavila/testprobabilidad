@@ -1,0 +1,43 @@
+{% extends "webapp/base.html" %}
+
+{% load static %}
+
+{% block content %}
+   <!-- Heading -->
+   <section class="page-section clearfix">
+    <div class="container">
+      <div class="intro">
+        <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{% static 'webapp/img/Adv-3-1.jpg' %}" alt="">
+        <div class="intro-text left-0 text-center bg-faded p-5 rounded">
+          <h2 class="section-heading mb-4" >
+            <span class="section-heading-upper">Proyecto de Titulación</span>
+            <span class="section-heading-lower">Universidad de Guayaquil</span>
+          </h2>
+          <p class="mb-3">Desarrollo de un modelo predictivo basado en algoritmos de aprendizaje de máquina supervisado en pacientes con enfermedades de alto índice de mortalidad y su relación con COVID-19.
+          </p>
+         
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  
+    <!-- Message -->
+    <section class="page-section cta">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-9 mx-auto">
+            <div class="cta-inner text-center rounded">
+              <h2 class="section-heading mb-4">
+                <span class="section-heading-upper">Inteligencia Artificial</span>
+                <span class="section-heading-lower">Machine Learning</span>
+              </h2>
+              <p class="mb-0">Algoritmos supervisados de Machine Learning: Naives Bayes y Árboles de Decisión.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+{% endblock %}
+    

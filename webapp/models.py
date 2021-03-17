@@ -1,0 +1,50 @@
+from django.db import models
+
+# Create your models here.
+
+#class Covid(models.Model):
+#    var = ((1,'Si'),(0,'No'))
+#    gro = ((1,'Masculino'),(0,'Femenino'))
+#    resPrueba = ((1,'Positivo'),(0,'Negativo'))
+#    ID = models.IntegerField(primary_key=True)
+#    SEXO = models.IntegerField(choices=gro)
+#    DECESO = models.IntegerField(choices=var,default=0)
+#    INTUBADO = models.IntegerField(choices=var,default=0)
+#    NEUMONIA = models.IntegerField(choices=var,default=0)
+#    EDAD = models.IntegerField()
+#    DIABETES = models.IntegerField(choices=var,default=0)
+#    EPOC = models.IntegerField(choices=var,default=0)
+#    ASMA = models.IntegerField(choices=var,default=0)
+#    INMUSUPR = models.IntegerField(choices=var,default=0)
+#    HIPERTENSION = models.IntegerField(choices=var,default=0)
+#    OTRA_CON = models.IntegerField(choices=var,default=0)
+#    CARDIOVASCULAR = models.IntegerField(choices=var,default=0)
+#    OBESIDAD = models.IntegerField(choices=var,default=0)
+#    RENAL_CRONICA = models.IntegerField(choices=var,default=0)
+#    TABAQUISMO = models.IntegerField(choices=var,default=0)
+#    OTRO_CASO = models.IntegerField(choices=var,default=0)
+#    RESULTADO = models.IntegerField(choices=resPrueba,default=0)
+#    UCI = models.IntegerField(choices=var,default=0)
+#    PRONOSTICO = models.IntegerField()
+
+class Covid(models.Model):
+    var = ((1,'Si'),(0,'No'))
+    gro = ((1,'Femenino'),(0,'Masculino'))
+    ID = models.IntegerField(primary_key=True)
+    SEXO = models.IntegerField(choices=gro)
+    EDAD = models.IntegerField()
+    NEUMONIA = models.IntegerField(choices=var,default=0)
+    DIABETES = models.IntegerField(choices=var,default=0)
+    EPOC = models.IntegerField(choices=var,default=0)
+    ASMA = models.IntegerField(choices=var,default=0)
+    INMUSUPR = models.IntegerField(choices=var,default=0)
+    HIPERTENSION = models.IntegerField(choices=var,default=0)
+    CARDIOVASCULAR = models.IntegerField(choices=var,default=0)
+    OBESIDAD = models.IntegerField(choices=var,default=0)
+    RENAL_CRONICA = models.IntegerField(choices=var,default=0)
+    TABAQUISMO = models.IntegerField(choices=var,default=0)
+    COVID = models.IntegerField(choices=var,default=0)
+    OTRA_COM = models.IntegerField(choices=var,default=0)
+    DECESO = models.IntegerField()
+
+   
